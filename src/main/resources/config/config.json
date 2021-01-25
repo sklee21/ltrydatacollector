@@ -1,0 +1,25 @@
+{
+	"http": {
+		"lotteryUrl": "https://dhlottery.co.kr/store.do?method=topStore&pageGubun=L645",
+		"requestContentType": "application/x-www-form-urlencoded",
+		"postDataCharset": "EUC-KR",
+		"userAgent": "Mozilla",
+		"ignoreHttpError": "true"
+	},
+	
+	"postParams": {
+		"method": "topStore",
+		"nowPage": "",
+		"rankNo": "",
+		"gameNo": "5133",
+		"schKey": "all"
+	},
+	
+	"html": {
+		"contentDiv": "div.group_content",
+		"titleh": "h4.title",
+		"storeTable": "table.tbl_data_col",
+		"1stLabel": "1등",
+		"2ndLabel": "2등"
+	}
+}
