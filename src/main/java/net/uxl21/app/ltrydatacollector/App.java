@@ -1,21 +1,14 @@
 package net.uxl21.app.ltrydatacollector;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 /**
  * Hello world!
@@ -24,15 +17,6 @@ import com.google.gson.JsonParser;
 public class App {
 	
     public static void main( String[] args ) {
-    	InputStreamReader inReader = new InputStreamReader(App.class.getResourceAsStream("/config/config.json"));    	
-    	JsonElement rootElement = JsonParser.parseReader(inReader);
-    	JsonObject rootObj = rootElement.getAsJsonObject();    	
-    	
-    	
-    	
-    	
-    	
-    	
     	String drwNo = "", schVal = "";
     	
     	if( args.length == 2 ) {
