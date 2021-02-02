@@ -1,9 +1,20 @@
 package net.uxl21.app.ltrydatacollector;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,7 +27,83 @@ import org.jsoup.select.Elements;
  */
 public class App {
 	
-    public static void main( String[] args ) {
+    public static void main( String[] args ) throws IOException {
+    	URL url = new URL(" https://integration-middleware.as.restaurant-partners.com/v2/login");
+    	HttpURLConnection con = (HttpURLConnection) url.openConnection();
+    	con.setRequestMethod("POST");
+    	con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+    	/* Payload support */
+    	con.setDoOutput(true);
+    	DataOutputStream out = new DataOutputStream(con.getOutputStream());
+    	out.writeBytes("grant_type=client_credentials&username=plugin-fujitsu-001&password=nRTJ7RGc79");
+    	out.flush();
+    	out.close();
+
+    	int status = con.getResponseCode();
+    	BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+    	String inputLine;
+    	StringBuffer content = new StringBuffer();
+    	while((inputLine = in.readLine()) != null) {
+    		content.append(inputLine);
+    	}
+    	in.close();
+    	con.disconnect();
+    	System.out.println("Response status: " + status);
+    	System.out.println(content.toString());
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	/*
+		//
+		// parameter
+    	//String paramStr = "{ \"grant_type\":\"client_credentials\", \"username\": \"plugin-fujitsu-001\", \"password\": \"nRTJ7RGc79\"}";
+    	String paramStr = "grant_type=client_credentials&username=plugin-fujitsu-001&password=nRTJ7RGc79";
+    	
+		StringEntity strEntity = new StringEntity(paramStr);
+		
+		HttpPost httpPost = new HttpPost("https://integration-middleware.as.restaurant-partners.com/v2/login");
+		httpPost.setEntity(strEntity);
+		
+		//
+		// headers
+		HashMap<String, String> headers = new HashMap<>();
+		headers.put("Content-Type", "application/x-www-form-urlencoded");
+		
+		
+		//
+		// send request
+		HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
+		CloseableHttpClient httpClient = httpClientBuilder.build();
+		CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
+		
+		//
+		// result
+		String responseStr = EntityUtils.toString(httpResponse.getEntity(), "utf-8");
+		
+		//
+		// releases resources
+		httpClient.close();
+		httpResponse.close();
+		
+		System.out.println(responseStr);
+		*/
+		
+		
+		
+		
+		
+    	/*
+    	System.out.println(
+    		"2016-03-14T17:00:00.000Z".replaceAll("\\D+", "")
+    	);
+    	
+    	
+    	
     	String drwNo = "", schVal = "";
     	
     	if( args.length == 2 ) {
@@ -111,6 +198,7 @@ public class App {
 			System.out.println(storeLists[0].toString());
 			System.out.println(storeLists[1].toString());
 		}
+		*/
     }
     
 }
