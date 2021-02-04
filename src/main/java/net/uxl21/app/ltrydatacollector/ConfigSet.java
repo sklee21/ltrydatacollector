@@ -2,6 +2,7 @@ package net.uxl21.app.ltrydatacollector;
 
 import java.io.InputStreamReader;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -34,29 +35,6 @@ public class ConfigSet {
 		return instance;
 	}
 	
-	
-	/*
-	protected JsonObject searchElement(JsonObject obj, String name) {
-		JsonObject searched = obj.getAsJsonObject(name);
-		
-		if( searched != null ) {
-			return searched;
-		}
-		
-		
-		Iterator<String> keys = obj.keySet().iterator();
-		
-		while( keys.hasNext() ) {
-			searched = this.searchElement(obj.getAsJsonObject(keys.next()), name);
-			
-			if( searched != null ) {
-				break;
-			}
-		}
-		
-		return searched;
-	}
-	*/
 	
 	
 	
@@ -99,6 +77,31 @@ public class ConfigSet {
 		} else {
 			return propObj.get(childProperty).getAsBoolean();
 		}
+	}
+	
+	
+	public int getInteger(String property) {
+		return this.rootObj.get(property).getAsInt();
+	}
+	
+	public int getChildInteger(String property, String childProperty) {
+		JsonObject propObj = this.rootObj.getAsJsonObject(property);
+		
+		return propObj.get(childProperty).getAsInt();
+	}
+	
+	
+	
+	public String[] getList(String property) {
+		JsonArray propArr = this.rootObj.getAsJsonArray(property);
+		int size = propArr.size();
+		String[] values = new String[size];
+		
+		for( int i=0; i<size; i++ ) {
+			values[i] = propArr.get(i).getAsString();
+		}
+		
+		return values;
 	}
 	
 }

@@ -1,10 +1,16 @@
 package net.uxl21.app.ltrydatacollector;
 
+import java.util.Objects;
+
 public class LotteryStoreData {
 	
-	private int no = -1;
+	private boolean isChecked = false;
+	
+	private String no = null;
 
 	private String storeName = null;
+	
+	private String winType = null;
 	
 	private String address = null;
 	
@@ -17,16 +23,28 @@ public class LotteryStoreData {
 
 	
 	
+	
 
-	public int getNo() {
+	public boolean isChecked() {
+		return isChecked;
+	}
+
+	public void setChecked(boolean isChecked) {
+		this.isChecked = isChecked;
+	}
+
+
+
+	public String getNo() {
 		return no;
 	}
 
-	public void setNo(int no) {
+	public void setNo(String no) {
 		this.no = no;
 	}
 
 
+	
 	public String getStoreName() {
 		return storeName;
 	}
@@ -35,6 +53,17 @@ public class LotteryStoreData {
 		this.storeName = storeName;
 	}
 
+	
+
+	public String getWinType() {
+		return winType;
+	}
+
+	public void setWinType(String winType) {
+		this.winType = winType;
+	}
+
+	
 
 	public String getAddress() {
 		return address;
@@ -42,6 +71,28 @@ public class LotteryStoreData {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	
+	
+	
+	
+	
+	@Override
+	public boolean equals(Object obj) {
+		if( obj instanceof LotteryStoreData ) {
+			LotteryStoreData storeData = this.getClass().cast(obj);
+			
+			return Objects.equals(this.storeName, storeData.getStoreName()) && Objects.equals(this.address, storeData.getAddress());
+
+		} else {
+			return false;
+		}
+	}
+
+
+	@Override
+	public String toString() {
+		return String.format("{ no=%s, storeName=%s, winType=%s, address=%s }", this.no, this.storeName, this.winType, this.address);
 	}
 	
 }
