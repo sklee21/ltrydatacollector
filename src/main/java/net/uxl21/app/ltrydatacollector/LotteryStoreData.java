@@ -6,6 +6,9 @@ public class LotteryStoreData {
 	
 	private boolean isChecked = false;
 	
+	
+	private String drwNo = null;
+	
 	private String no = null;
 
 	private String storeName = null;
@@ -33,6 +36,15 @@ public class LotteryStoreData {
 		this.isChecked = isChecked;
 	}
 
+
+	
+	public String getDrwNo() {
+		return drwNo;
+	}
+
+	public void setDrwNo(String drwNo) {
+		this.drwNo = drwNo;
+	}
 
 
 	public String getNo() {
@@ -92,7 +104,7 @@ public class LotteryStoreData {
 
 	@Override
 	public String toString() {
-		return String.format("{ no=%s, storeName=%s, winType=%s, address=%s }", this.no, this.storeName, this.winType, this.address);
+		return String.format("{ drwNo=%s, no=%s, storeName=%s, winType=%s, address=%s }", this.drwNo, this.no, this.storeName, this.winType, this.address);
 	}
 	
 }

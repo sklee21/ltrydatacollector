@@ -43,7 +43,7 @@ public class App {
 			
 			
 			if( doc != null ) {
-				LotteryStoreHTMLDataParser parser = new LotteryStoreHTMLDataParser(doc, true);
+				LotteryStoreHTMLDataParser parser = new LotteryStoreHTMLDataParser(doc, drwNo, true);
 				ArrayList<LotteryStoreData>[] storeLists = parser.parse();
 				
 				firstPlaces.addAll(storeLists[0]);
@@ -55,13 +55,16 @@ public class App {
 		}
 		
 		
-		System.out.println("======= [First Places] =======");
+		LotteryStoreDataUtil.distinct(firstPlaces);
+		LotteryStoreDataUtil.distinct(secondPlaces);
+		
+		System.out.printf("======= [First Places(%d)] =======\n", firstPlaces.size());
 		for( LotteryStoreData storeData : firstPlaces ) {
 	    	System.out.println(storeData.toString());
 		}
 		System.out.println("=============================\n");
 		
-		System.out.println("======= [Second Places] =======");
+		System.out.printf("======= [Second Places(%d)] =======\n", secondPlaces.size());
 		for( LotteryStoreData storeData : secondPlaces ) {
 	    	System.out.println(storeData.toString());
 		}

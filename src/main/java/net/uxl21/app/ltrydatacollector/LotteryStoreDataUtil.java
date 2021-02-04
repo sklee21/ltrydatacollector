@@ -8,7 +8,7 @@ public class LotteryStoreDataUtil {
 	
 	
 
-	public static LotteryStoreData toLotteryStoreData(String strData, boolean isFirstPlace) {
+	public static LotteryStoreData toLotteryStoreData(String strData, String drwNo, boolean isFirstPlace) {
 		String cleaned = strData;
 		String[] dataToClean = configSet.getList("dataToClean");
 		
@@ -35,6 +35,7 @@ public class LotteryStoreDataUtil {
     	}
     	
     	LotteryStoreData storeData = new LotteryStoreData();
+    	storeData.setDrwNo(drwNo);
     	storeData.setNo(no);
     	storeData.setStoreName(storeName);
     	storeData.setWinType(winType);

@@ -9,12 +9,16 @@ import org.jsoup.select.Elements;
 
 public class LotteryStoreHTMLDataParser {
 	
-	private Document rootDoc = null;
-	
 	private ConfigSet configSet = null;
 	
 	
+	
+	private Document rootDoc = null;
+	
 	private boolean distinct = false;
+	
+	private String drwNo = null;
+
 	
 	
 	private String noDataText = null;
@@ -22,16 +26,27 @@ public class LotteryStoreHTMLDataParser {
 	
 	
 
-	public LotteryStoreHTMLDataParser(Document rootDoc, boolean distinct) {
-		this.rootDoc = rootDoc;
+	public LotteryStoreHTMLDataParser(Document rootDoc, String drwNo, boolean distinct) {
 		this.configSet = ConfigSet.getInstance();
+		this.rootDoc = rootDoc;
 		this.distinct = distinct;
+		this.drwNo = drwNo;
 		this.noDataText = this.configSet.getString("noDataText");
 	}
 	
 	
 	public LotteryStoreHTMLDataParser(Document rootDoc) {
-		this(rootDoc, false);
+		this(rootDoc, "-1", false);
+	}
+	
+	
+	public LotteryStoreHTMLDataParser(Document rootDoc, boolean distinct) {
+		this(rootDoc, "-1", distinct);
+	}
+	
+	
+	public LotteryStoreHTMLDataParser(Document rootDoc, String drwNo) {
+		this(rootDoc, drwNo, false);
 	}
 	
 	
@@ -43,7 +58,6 @@ public class LotteryStoreHTMLDataParser {
 		storeLists[1] = new ArrayList<LotteryStoreData>();
 		storeLists[2] = new ArrayList<LotteryStoreData>();
 
-		
 		Elements groupContentDivs = this.rootDoc.select(configSet.getChildString("html", "contentDiv"));
 		
 		for( Element contentDiv : groupContentDivs ) {
@@ -82,7 +96,7 @@ public class LotteryStoreHTMLDataParser {
 						trText = tr.text();
 						
 						if( !Objects.equals(trText, this.noDataText) ) {
-							storeLists[rankIndex].add( LotteryStoreDataUtil.toLotteryStoreData(trText, (rankIndex == 0)) );
+							storeLists[rankIndex].add( LotteryStoreDataUtil.toLotteryStoreData(trText, this.drwNo, (rankIndex == 0)) );
 						}
 					}
 				}
